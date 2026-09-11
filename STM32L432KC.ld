@@ -34,4 +34,35 @@ SECTIONS
         *(.rodata*)
         . = ALIGN(4);
     } >FLASH
+
+    _sidata = .;
+    .data : AT(_sidata)
+    {
+        . = ALIGN(4);
+        _sdata = .;
+        *(.data)
+        *(.data*)
+        _edata = .;
+        . = ALIGN(4);
+    } >RAM
+
+    .bss :
+    {
+        . = ALIGN(4);
+        _sbss = .;
+        *(.bss)
+        *(.bss*)
+        *(COMMON)
+        . = ALIGN(4);
+        _ebss = .;
+    } >RAM
+
+    .dynamic_allocations :
+    {
+        . = ALIGN(4);
+        _ssystem_ram = .;
+        . = . + _Min_Leftover_RAM;
+        . = ALIGN(4);
+        _esystem_ram = .;
+    } >RAM
 }
