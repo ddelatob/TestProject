@@ -5,6 +5,17 @@
 
 .global vtable
 .global default_interrupt_handler
+.global reset_handler
+
+.type reset_handler, %function
+reset_handler:
+	LDR r0, =_estck
+	MOV sp, r0
+	MOVS r0, #0
+	LDR r1, =_sdata
+	LDR r2, =_edata
+	LDR r3, =_sidata
+	B copy_sidata_loop
 
 .section .vector_table, "a", %progbits
 .type vtable, %object
