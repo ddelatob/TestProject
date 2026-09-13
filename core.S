@@ -46,7 +46,7 @@ reset_handler:
 .type vtable, %object
 vtable:
 	.word	_estack
-	.word	Reset_Handler
+	.word	reset_handler
 	.word	NMI_Handler
 	.word	HardFault_Handler
 	.word	MemManage_Handler
@@ -355,6 +355,7 @@ vtable:
 
 
 .section .text.default_interrupt_handler, "ax", %progbits
+.type default_interrupt_handler, %function
 default_interrupt_handler:
     default_interrupt_loop:
         B default_interrupt_loop
