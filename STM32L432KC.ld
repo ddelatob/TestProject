@@ -7,7 +7,7 @@ _Min_Leftover_RAM = 0x400;
 MEMORY
 {
     FLASH ( rx )    : ORIGIN = 0x08000000, LENGTH = 256K
-    RAM ( rxw )     : ORIGIN = 0x20000000, LENGTH = 64K
+    RAM ( rwx )     : ORIGIN = 0x20000000, LENGTH = 64K
 }
 
 SECTIONS
@@ -19,7 +19,7 @@ SECTIONS
         . = ALIGN(4);
     } >FLASH
 
-    .text:
+    .text :
     {
         . = ALIGN(4);
         *(.text)
@@ -27,7 +27,7 @@ SECTIONS
         . = ALIGN(4);
     } >FLASH
 
-    .rodata:
+    .rodata :
     {
         . = ALIGN(4);
         *(.rodata)
